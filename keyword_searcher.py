@@ -50,17 +50,12 @@ def comment_remover(text):
     return re.sub(pattern, replacer, text)
 
 
-def getOneHot(filename):
+def getOneHot(src):
 	# Scans the C file for how many instances of each keyword there are
 	instances = np.zeros(len(keywords), dtype=int) #len(keywords)*[0]
-	filename = "input/fnc1.c"
-
-	f = open(filename, "r")
-	file_contents = f.read()
-	print(file_contents)
 
 	for i, kw in enumerate(keywords):
-		instances[i] = len(re.findall(kw_dict[kw],file_contents))
+		instances[i] = len(re.findall(kw_dict[kw],src))
 
 	print ("Keyword\tNum instances")
 	for kw,inst in zip(keywords, instances):
@@ -68,14 +63,17 @@ def getOneHot(filename):
 	
 	return instances
 
-#def getEffort(filename):
+def getEffort(funcname):
+	# Looks up the amount of effort this function required 
+	# to perform analysis on
+	return 0
 
 filename = "./input/fnc1.c"
 print (filename)
 f = open(filename,"r")
-src =comment_remover("".join(f.readlines()))
+src = comment_remover("".join(f.readlines()))
 
-getOneHot(filename)
+getOneHot(src)
 
 print("Show list of function definitions:")
 show_all_funcs(src)
