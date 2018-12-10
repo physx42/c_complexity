@@ -73,6 +73,7 @@ print (filename)
 f = open(filename,"r")
 src = comment_remover("".join(f.readlines()))
 
+# Test run to see if regexes are working
 getOneHot(src)
 
 print("Show list of function definitions:")
